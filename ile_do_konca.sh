@@ -8,6 +8,7 @@
 
 echo "Do końca pracy o 17 zostało: $((17-($(date +%H)+1))):$((60-$(date +%M)))"
 echo test
+echo test3
 
 
 
