@@ -1,18 +1,9 @@
 #! /bin/bash
 
-
-#koniec=16
-#terazh= sacascascasc
-#terazm=$(date +%M)
-#zostalo_min=$((60-$terazm))
-
-echo "Do końca pracy o 17 zostało: $((17-($(date +%H)+1))):$((60-$(date +%M)))"
-echo test
-echo test3
+echo "Podaj o której kończysz pracę:"
+read h_end
 
 
+echo "Do końca pracy o $h_end zostało: $((h_end-($(date +%H)+1))):$((60-$(date +%M)))"
 
-if [ $1 -eq  1 ] 
-then
- echo test
-fi
+
