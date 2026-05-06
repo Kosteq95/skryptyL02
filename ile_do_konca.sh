@@ -52,8 +52,8 @@ then
 fi
 
 
-count=$((count++))
+count=$((count+1))
 echo $count > $f_dir
 
 echo "Do końca pracy o $text zostało: $h_left h $m_left min"
-
+echo "Weź się do roboty bo już $count raz sprawdzasz ile do końca!"
