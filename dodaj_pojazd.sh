@@ -17,6 +17,7 @@
 # Numer rejestracyjny: .......... 
 # Data ostatniego przegladu: DD.MM.YYYY 
 # Przebieg na ostatnim przeglądzie: ...... km 
+set -e
 
 function pobierz_dane
 {
@@ -24,13 +25,13 @@ function pobierz_dane
     licznik=0
     while [ -z $dana ]
     do
-        read -p "Podaj dane pojazdu: " dana
+        read -p "Podaj $1 pojazdu: " dana
         licznik=$((licznik+1))
 
         if [ $licznik -gt 3 ]
         then
             echo "Nie podałeś wymaganych danych!" 1>&2
-            exit
+            exit 2
         fi
     done
     echo $dana
@@ -51,7 +52,7 @@ fi
 
 
 #read -p "Podaj markę samochodu: " marka
-marka=$(pobierz_dane)
+marka=$(pobierz_dane "markę")
 read -p "Podaj model samochodu: " model
 read -p "Podaj rocznik samochodu: " rocznik
 read -p "Podaj numer rejestracyjny samochodu: " nr_rej
