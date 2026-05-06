@@ -1,5 +1,13 @@
 #! /bin/bash
 
+f_dir="/tmp/licznik.dfgc"
+count=0
+
+if [ -e $f_dir ]
+then
+    count=$(cat $f_dir)
+fi
+
 echo "Podaj o której kończysz pracę:"
 read h_end m_end
 
@@ -25,6 +33,8 @@ fi
 h_now=$(($(date +%H)+2))
 m_now=$(date +%M)
 
+text="$h_end:$m_end"
+
 if [ $m_end -lt $m_now ]
 then
   h_end=$((h_end-1))
@@ -36,5 +46,14 @@ echo "Aktualna godzina to $h_now:$m_now"
 h_left=$((h_end-h_now))
 m_left=$((m_end-m_now))
 
-echo "Do końca pracy o $h_end:$m_end  zostało: $h_left h $m_left min"
+if [ $h_left -lt 0 ]
+then
+  h_left=$((h_left+24))
+fi
+
+
+count=$((count++))
+echo $count > $f_dir
+
+echo "Do końca pracy o $text zostało: $h_left h $m_left min"
 
