@@ -53,10 +53,35 @@ fi
 
 #read -p "Podaj markę samochodu: " marka
 marka=$(pobierz_dane "markę")
-read -p "Podaj model samochodu: " model
-read -p "Podaj rocznik samochodu: " rocznik
-read -p "Podaj numer rejestracyjny samochodu: " nr_rej
-read -p "Podaj datę ostatniego przeglądu i przebieg samochodu: (DD:MM:YYYY) " data_przegladu przebieg
+model=$(pobierz_dane "model")
+
+
+isok=0
+
+while [ $isok -eq 0 ]
+do 
+    rocznik=$(pobierz_dane "rocznik")
+    set +e
+    zmienna=$(echo $rocznik | grep -icE "[0-9]")
+    set -e
+    if [ $zmienna -eq 0 ]
+    then
+        echo "Podano test zamiast rocznika!"
+    elif [ $rocznik -lt 1884 ] || [ $rocznik -gt $(date +%Y) ]
+    then
+        echo "Takie auto nie może istnieć! Podaj rocznik z zakresu 1884 - $(date +%Y)"
+    else
+        isok=1
+    fi
+done
+
+
+
+
+nr_rej=$(pobierz_dane "numer rejestracyjny")
+data_przegladu=$(pobierz_dane "datę ostatniego przegladu")
+przebieg=$(pobierz_dane "przebieg")
+
 
 
 dir_path="$HOME/Baza_Pojazdow/$typ/$marka"
