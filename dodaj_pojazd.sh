@@ -62,7 +62,7 @@ while [ $isok -eq 0 ]
 do 
     rocznik=$(pobierz_dane "rocznik")
     set +e
-    zmienna=$(echo $rocznik | grep -icE "[0-9]")
+    zmienna=$(echo $rocznik | grep -icE "^[0-9]+$")
     set -e
     if [ $zmienna -eq 0 ]
     then
@@ -79,7 +79,25 @@ done
 
 
 nr_rej=$(pobierz_dane "numer rejestracyjny")
-data_przegladu=$(pobierz_dane "datę ostatniego przegladu")
+
+
+isok=0
+
+while [ $isok -eq 0 ]
+do 
+    data_przegladu=$(pobierz_dane "datę ostatniego przegladu")
+    set +e
+    zmienna=$(echo "$rocznik" | grep -iqE "^[0-9.]+$")
+    echo "Zmienna: $zmienna"
+    set -e
+    if [ $zmienna -eq 0 ]
+    then
+        echo "Podano test zamiast rocznika!"
+    fi
+done
+
+
+
 przebieg=$(pobierz_dane "przebieg")
 
 
